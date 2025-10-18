@@ -28,11 +28,28 @@ class PostCreate(PostBase):
     pass
 
 
+class PostUpdate(PostBase):
+    title: Optional[str] = None
+    content: Optional[str] = None
+
+    model_config = {
+        "from_attributes": True
+    }
+
 class PostResponse(PostBase):
     id: int
-    created_at: datetime
     author: UserResponse
+    created_at: datetime
 
     class Config:
         orm_mode = True
 
+
+class PostResponseUpdate(PostBase):
+    id: int
+    author: UserResponse
+    created_at: datetime
+    updated_at: Optional[datetime] = None
+
+    class Config:
+        orm_mode = True
